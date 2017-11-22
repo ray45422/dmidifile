@@ -4,6 +4,7 @@ import std.file;
 import std.string;
 import std.range;
 import std.exception;
+import std.traits;
 
 enum MIDIEventType : ubyte
 {
@@ -391,7 +392,7 @@ void flipEndian(T)(T* pData)
         foreach(ref m; (*pData).tupleof)
         {
             alias M = typeof(m);
-            static if(M.sizeof > 1 && (is(M == struct) || std.traits.isNumeric!M || std.traits.isSomeChar!M))
+            static if(M.sizeof > 1 && (is(M == struct) || isNumeric!M || isSomeChar!M))
                 flipEndian(&m);
         }
     }
