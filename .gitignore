@@ -3,6 +3,7 @@ dub.selection.json
 docs.json
 __dummy.html
 docs/
+libdmidifile.a
 dmidifile.so
 dmidifile.dylib
 dmidifile.dll
