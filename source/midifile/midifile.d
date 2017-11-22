@@ -258,6 +258,15 @@ class MIDIFile
                                     ev.note.velocity = param2;
                                     break;
                                 }
+                            case MIDIEventType.PitchWheel:
+                                {
+                                    ev.note.channel = status & 0x0F;
+                                    ev.pitch.channel = status & 0x0F;
+                                    ev.pitch.msb = cast(ubyte)param1;
+                                    ev.pitch.lsb = cast(ubyte)param2;
+                                    ev.pitch.pitch = (param2 << 7 | (param1 & 0x7f)) - 8192;
+                                    break;
+                                }
                             default:
                                 // TODO: handle other event types?
                                 appendEvent = false;
@@ -305,6 +314,13 @@ struct MIDIEvent
     {
         int microsecondsPerBeat;
     }
+    struct PitchBend
+    {
+        ubyte channel;
+        int pitch;
+        ubyte msb;
+        ubyte lsb;
+    }
     struct SMPTE
     {
         ubyte hours, minutes, seconds, frames, subFrames;
@@ -332,6 +348,7 @@ struct MIDIEvent
         int sequenceNumber;
         string text;
         Tempo tempo;
+        PitchBend pitch;
         SMPTE smpte;
         TimeSignature timeSignature;
         KeySignature keySignature;
