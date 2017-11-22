@@ -1,2 +1,15 @@
-.dub/*
-build/*
+.dub
+dub.selection.json
+docs.json
+__dummy.html
+docs/
+dmidifile.so
+dmidifile.dylib
+dmidifile.dll
+dmidifile.a
+dmidifile.lib
+dmidifile-test-*
+*.exe
+*.o
+*.obj
+*.lst
